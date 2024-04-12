@@ -2,6 +2,8 @@ module github.com/vinishs59/simplebank
 
 go 1.22
 
+toolchain go1.22.1
+
 require (
 	github.com/lib/pq v1.10.9
 	github.com/stretchr/testify v1.9.0
