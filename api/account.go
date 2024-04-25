@@ -42,3 +42,22 @@ log.Print("Create Account")
 
 	ctx.JSON(http.StatusOK,account)
 }
+
+type getAccountReq struct{
+	ID  int32 `uri:"id" binding:"required,min=1"` 
+}
+
+func (s *Server) getAccount(ctx *gin.Context) {
+	var req getAccountReq
+	if err := ctx.ShouldBindUri(&req);err!= nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+	account ,err := s.store.GetAccount(ctx,req.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+   }
+   ctx.JSON(http.StatusOK,account)
+
+}
