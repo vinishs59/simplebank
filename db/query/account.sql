@@ -12,6 +12,11 @@ RETURNING *;
 SELECT * FROM accounts
 WHERE user_id = $1 LIMIT 1;
 
+-- name: GetAccountForUpdate :one
+SELECT * FROM accounts
+WHERE user_id = $1 LIMIT 1
+FOR NO KEY UPDATE;
+
 -- name: ListAccount :many
 SELECT * FROM accounts
 ORDER BY user_id

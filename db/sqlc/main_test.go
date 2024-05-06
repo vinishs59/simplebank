@@ -17,12 +17,12 @@ var testQueries *Queries
 var testDb *sql.DB
 
 func TestMain(m *testing.M) {
-    var err error
+	var err error
 
-	testDb, err = sql.Open(dbDriver,dbSource)
+	testDb, err = sql.Open(dbDriver, dbSource)
 
 	if err != nil {
-		log.Fatal("Cannot connect to db", err )
+		log.Fatal("Cannot connect to db", err)
 	}
 
 	testQueries = New(testDb)

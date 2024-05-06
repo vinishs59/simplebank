@@ -13,12 +13,12 @@ import (
 var testStore *Store = NewStore(testDb)
 
 func createRandomAccount(t *testing.T) Account {
-	user := "test "//createRandomUser(t)
+	user := "test " //createRandomUser(t)
 
 	arg := CreateAccountParams{
-		OwnerName:    user,//user.Username,
-		Balance:  util.RandomMoney(),
-		Currency: sql.NullString{String: "USD", Valid: true},
+		OwnerName: user, //user.Username,
+		Balance:   util.RandomMoney(),
+		Currency:  sql.NullString{String: "USD", Valid: true},
 	}
 
 	//testStore := NewStore(testDb)
@@ -55,7 +55,7 @@ func TestGetAccount(t *testing.T) {
 		// Convert sql.NullTime to time.Time
 		time1 := account1.CreatedAt.Time
 		time2 := account2.CreatedAt.Time
-	
+
 		// Use time1 and time2 with require.WithinDuration
 		require.WithinDuration(t, time1, time2, time.Second)
 	}
@@ -65,11 +65,11 @@ func TestUpdateAccount(t *testing.T) {
 	account1 := createRandomAccount(t)
 
 	arg := UpdateAccountParams{
-		UserID:      account1.UserID,
+		UserID:  account1.UserID,
 		Balance: util.RandomMoney(),
 	}
 
-	 err := testStore.UpdateAccount(context.Background(), arg)
+	err := testStore.UpdateAccount(context.Background(), arg)
 	require.NoError(t, err)
 	//require.NotEmpty(t, account2)
 
@@ -81,7 +81,7 @@ func TestUpdateAccount(t *testing.T) {
 	// 	// Convert sql.NullTime to time.Time
 	// 	time1 := account1.CreatedAt.Time
 	// 	time2 := account2.CreatedAt.Time
-	
+
 	// 	// Use time1 and time2 with require.WithinDuration
 	// 	require.WithinDuration(t, time1, time2, time.Second)
 	// }
