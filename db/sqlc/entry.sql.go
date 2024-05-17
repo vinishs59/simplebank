@@ -41,7 +41,7 @@ SELECT id, account_id, amount, created_at FROM entries
 WHERE id = $1 LIMIT 1
 `
 
-func (q *Queries) GetEntry(ctx context.Context, id int32) (Entry, error) {
+func (q *Queries) GetEntry(ctx context.Context, id int64) (Entry, error) {
 	row := q.queryRow(ctx, q.getEntryStmt, getEntry, id)
 	var i Entry
 	err := row.Scan(

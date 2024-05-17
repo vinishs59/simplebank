@@ -111,6 +111,25 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 			return err
 		}
 
+		fromAccount, err := q.GetAccount(ctx, int32(arg.FromAccountID))
+		if err != nil {
+			return err
+		}
+		q.UpdateAccount(ctx, UpdateAccountParams{
+			UserID:  fromAccount.UserID,
+			Balance: fromAccount.Balance - arg.Amount,
+		})
+
+		toAccount, err := q.GetAccount(ctx, int32(arg.ToAccountID))
+		if err != nil {
+			return nil
+
+		}
+		q.UpdateAccount(ctx, UpdateAccountParams{
+			UserID:  toAccount.UserID,
+			Balance: toAccount.Balance + arg.Amount,
+		})
+
 		return nil
 
 	})
